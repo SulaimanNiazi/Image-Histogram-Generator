@@ -33,6 +33,7 @@ def getRandomImage(path):
 def main():
     path=input("Enter path to an image: ")
     if not imagePathCheck(path):
+        print('You did not enter a path to an image, proceeding to find a random image in the given directory.\n')
         path=getRandomImage(path)
     im = cv2.imread(path)
     gray = im #cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
