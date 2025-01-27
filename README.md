@@ -33,7 +33,7 @@ A Python project that takes an image file path as input then generates and plots
 
 Run the Python script:
 ```bash
-python main.py
+python '.\histogram generator.py'
 ```
 
 The program will prompt for the file path to an image:
