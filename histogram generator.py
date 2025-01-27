@@ -1,8 +1,7 @@
-import cv2
-import pylab
+import cv2, pylab
 from skimage import img_as_ubyte
 import numpy as np
-import os
+import os, random
 
 def plot_image(imag, title=''):
     pylab.title(title, size=20), pylab.imshow(imag)
@@ -14,8 +13,27 @@ def plot_hist(r, title=''):
     pylab.xlabel('pixel value', size=20), pylab.ylabel('frequency', size=20)
     pylab.title(title, size=20)
 
+def imagePathCheck(imagePath):
+    return imagePath.lower().endswith(('.png', '.jpg', '.jpeg', '.gif'))
+
+def getRandomImage(path):
+    if path=="":
+        path="."
+    try:
+        files = os.listdir(path)
+        images = [file for file in files if imagePathCheck(file)]
+        if not images:
+            print("No images found in the specified folder.")
+            return None
+        return random.choice(images)
+    except Exception as e:
+        print(f"An error occurred while selecting image randomly: {e}")
+        return None
+
 def main():
     path=input("Enter path to an image: ")
+    if not imagePathCheck(path):
+        path=getRandomImage(path)
     im = cv2.imread(path)
     gray = im #cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
     pylab.style.use('ggplot') 
